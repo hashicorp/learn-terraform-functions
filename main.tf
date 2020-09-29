@@ -71,10 +71,9 @@ resource "aws_security_group" "sg_8080" {
 
 
 resource "aws_instance" "web" {
-  ami                         = data.aws_ami.id
+  ami                         = data.aws_ami.ubuntu.id
   instance_type               = "t2.micro"
   subnet_id                   = aws_subnet.subnet_public.id
   vpc_security_group_ids      = [aws_security_group.sg_8080.id]
   associate_public_ip_address = true
-  user_data                   = templatefile("user_data.tmpl", {department = var.user_department name = var.user_name} )
 }
