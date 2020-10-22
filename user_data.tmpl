@@ -5,3 +5,21 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confd
 sudo apt-get -y -qq install curl wget git vim apt-transport-https ca-certificates
 sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo apt -y -qq install golang-go
+
+# Setup sudo to allow no-password sudo for your group and adding your user
+sudo groupadd -r ${department}
+sudo useradd -m -s /bin/bash ${name}
+sudo usermod -a -G ${department} ${name}
+sudo cp /etc/sudoers /etc/sudoers.orig
+echo "${name} ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/${name}
+
+# Create GOPATH for your user & download the webapp from github
+sudo -H -i -u ${name} -- env bash << EOF
+cd /home/${name}
+export GOROOT=/usr/lib/go
+export GOPATH=/home/${name}/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+go get -d github.com/hashicorp/learn-go-webapp-demo
+cd go/src/github.com/hashicorp/learn-go-webapp-demo
+go run webapp.go
+EOF
