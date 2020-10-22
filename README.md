@@ -2,4 +2,4 @@
 
 Learn what Terraform functions are and how to use.
 
-Follow along with the Learn guide at HashiCorp Learn.
+Follow along with the [Learn tutorial at HashiCorp Learn](https://learn.hashicorp.com/tutorials/terraform/functions?in=terraform/configuration-language).
