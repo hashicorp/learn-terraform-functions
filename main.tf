@@ -1,16 +1,11 @@
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-      version = "~> 3.47.0"
+provider "aws" {
+  region = var.aws_region
+
+  default_tags {
+    tags = {
+      hashicorp-learn = "learn-terraform-functions"
     }
   }
-
-  required_version = ">= 0.13"
-}
-
-provider "aws" {
-  region  = var.aws_region
 }
 
 data "aws_ami" "ubuntu" {
@@ -84,3 +79,4 @@ resource "aws_instance" "web" {
   vpc_security_group_ids      = [aws_security_group.sg_8080.id]
   associate_public_ip_address = true
 }
+
