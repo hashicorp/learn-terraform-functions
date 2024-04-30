@@ -2,9 +2,8 @@
 
 # Install necessary dependencies
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
-sudo apt-get -y -qq install curl wget git vim apt-transport-https ca-certificates
-sudo add-apt-repository ppa:longsleep/golang-backports -y
 sudo apt-get update
+sudo apt-get -y -qq install curl wget git vim apt-transport-https ca-certificates
 sudo apt -y -qq install golang-go
 
 # Setup sudo to allow no-password sudo for your group and adding your user
@@ -20,7 +19,7 @@ cd /home/${name}
 export GOROOT=/usr/lib/go
 export GOPATH=/home/${name}/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-go get -d github.com/hashicorp/learn-go-webapp-demo
-cd go/src/github.com/hashicorp/learn-go-webapp-demo
+git clone https://github.com/hashicorp/learn-go-webapp-demo.git
+cd learn-go-webapp-demo
 go run webapp.go
 EOF

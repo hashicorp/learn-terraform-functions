@@ -16,7 +16,7 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-xenial-16.04-amd64-server-*"]
+    values = ["ubuntu/images/hvm-ssd-gp3/ubuntu-noble-24.04-amd64-server-*"]
   }
 
   filter {
@@ -82,4 +82,3 @@ resource "aws_instance" "web" {
   vpc_security_group_ids      = [aws_security_group.sg_8080.id]
   associate_public_ip_address = true
 }
-
